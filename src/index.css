@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --primary: rgb(231, 94, 94); 
+    --primary-dark: rgb(45, 64, 50);
+}
+
+.select-field {
+  @apply border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-700
+         focus:outline-none focus:ring-1 focus:ring-[var(--primary)]
+         focus:border-[var(--primary)]
+         dark:bg-[var(--primary-dark)] dark:text-white dark:border-[var(--primary)];
+}
