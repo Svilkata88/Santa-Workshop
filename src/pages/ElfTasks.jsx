@@ -1,9 +1,10 @@
 import { baseUrl } from '../../firebase/firebaseConfig';
 import { fetchById } from '../../utils/utils';
 import { useState, useEffect } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useUserContext } from '../context/userContext';
 import toast from "react-hot-toast";
+import CreateBtn from '../components/buttons/CreateBtn';
 
 
 export default function ElfTasks() {
@@ -11,13 +12,13 @@ export default function ElfTasks() {
     const {user} = useUserContext();
     const {elfId} = useParams();
     const [elf, setElf] = useState({});
-    const [tasks, setTasks] = useState([]);
 
     useEffect(()=> {
         fetchById(baseUrl, 'elves', elfId, user )
                 .then(elfData => {
+                    // remove the 1st empty task
+                    elfData.tasks = elfData.tasks.slice(1);
                     setElf(elfData);
-                    setTasks(elf.tasks ?? [])
                 })
                 .catch(() => {
                     toast.error('Failed to fetch the elf! Something goes wrong...');
@@ -33,18 +34,22 @@ export default function ElfTasks() {
                         dark:text-white">
              <h1 className="text-center mb-10 text-lg">Elf tasks</h1>
 
-             <Link to={`./new`} className='ml-10'>
-                <img src="/plus-btn.svg" alt="plus button" className='h-9'/>
-            </Link>
+             <CreateBtn url='./new' />
              
              <div>
-                {tasks.map( task => {
-                    return (
-                        <div>
-                            {task}
-                        </div>
-                    )
-                })}
+                {elf?.tasks && Object.values(elf.tasks).map((task, index) => (
+                    <div key={index} className="
+                            bg-[var(--primary)] dark:bg-[var(--primary-dark)] 
+                            p-3 mt-5
+                            rounded-md 
+                            flex gap-3 items-center
+                            w-1/2
+                            h-[50px]"
+                    >
+                        <p>{task.taskName}</p>
+                        <p className='border-l border-white pl-3'>{task.description}</p>
+                    </div>
+                ))}
             </div>
 
         </div>    

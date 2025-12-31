@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useUserContext } from '../context/userContext';
 import { useEffect, useState } from 'react';
 import { fetchToDb } from '../../utils/utils';
@@ -7,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import OrderCard from '../components/OrderCard';
 import toast from 'react-hot-toast';
+import CreateBtn from '../components/buttons/CreateBtn';
 
 export default function Orders() {
     
@@ -105,9 +105,7 @@ export default function Orders() {
                         Shipped
                     </button>
                     
-                    <Link to={'./new'} className='ml-10'>
-                        <img src="/plus-btn.svg" alt="plus button" className='h-9'/>
-                    </Link>
+                    <CreateBtn url='./new' />
                 </div>
 
                 <br/><br/>
