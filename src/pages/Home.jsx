@@ -1,6 +1,7 @@
 import ChristmasTimeLeft from '../components/CristmasTimeLeft';
 
 export default function Home() {
+
     return (
         <div className="relative h-[calc(100vh-56px)] w-full overflow-hidden">
             {/* Background video */}

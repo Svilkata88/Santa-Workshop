@@ -43,6 +43,7 @@ export default function OrderFormRow({toys, setError}) {
             <input 
                 type="text" 
                 name="childName" 
+                className='pl-4 py-2 border border-[var(--primary)] rounded-md'
                 placeholder='child name'
                 onBlur={(e) => setError(validate('childName', e.target.value))}
             />

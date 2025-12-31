@@ -16,12 +16,13 @@ export default function Orders() {
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('all');
 
-    const tabClass = `
-                        cursor-pointer
-                        px-2 py-1
-                        rounded-md
-                        hover:text-[var(--primary)]
-                    `;
+    const tabClass =`cursor-pointer px-2 py-1 rounded-md hover:text-[var(--primary)]`;
+
+    const onStatusUpdated = (newStatus, orderId) => {
+        setOrders(prev =>
+            prev.map(o => o.id === orderId ? { ...o, status: newStatus } : o)
+        );
+    }
 
      useEffect(()=> {
         if(!isAuthenticated) {
@@ -51,7 +52,8 @@ export default function Orders() {
             })
     }, [activeTab, orders.length]);
 
-    return ( loading ? 
+    return ( loading 
+                ? 
             <Spinner />
                 : 
             <div className='dark:bg-stone-900 
@@ -102,6 +104,7 @@ export default function Orders() {
                     >
                         Shipped
                     </button>
+                    
                     <Link to={'./new'} className='ml-10'>
                         <img src="/plus-btn.svg" alt="plus button" className='h-9'/>
                     </Link>
@@ -111,7 +114,11 @@ export default function Orders() {
                 {/* Orders listing */}
                 <div className="flex flex-wrap gap-4 ml-4">
                     {orders.map(order => (
-                        <OrderCard order={order} />
+                        <OrderCard 
+                            key={order.id}
+                            order={order}
+                            onStatusUpdated={onStatusUpdated} 
+                        />
                     ))}
                 </div>
             </div>

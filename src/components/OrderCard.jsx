@@ -4,10 +4,9 @@ import { baseUrl } from '../../firebase/firebaseConfig';
 import toast from 'react-hot-toast';
 import { useUserContext } from '../context/userContext';
 
-export default function OrderCard({ order }) {
+export default function OrderCard({ order, onStatusUpdated }) {
     const { user } = useUserContext();
     const [isEditing, setIsEditing] = useState(false);
-    const [status, setStatus] = useState(order.status);
 
     const updateStatusHandler = (formData) => {  
         const body = {status: formData.get('status')};  
@@ -15,7 +14,9 @@ export default function OrderCard({ order }) {
         patchToDb(baseUrl, 'PATCH', body, `orders/${order.id}`, user)
             .then(data => {
                 toast.success('Order status updated successfully!');
-                setStatus(body.status);
+                // update order status (client)
+                onStatusUpdated(body.status, order.id); 
+                // hide select status field
                 setIsEditing(false);
                 return null;
             })
@@ -23,7 +24,7 @@ export default function OrderCard({ order }) {
 
     useEffect(() => {
        
-    }, [status]);
+    }, [order.status]);
 
     return (
         <div key={order.id} className="bg-[var(--primary)] p-4 rounded-md mb-4 shadow-md dark:bg-[var(--primary-dark)] dark:text-white w-[300px] text-sm relative">
@@ -43,11 +44,10 @@ export default function OrderCard({ order }) {
             })
             }
             <p>Country: {order.country}</p>
-            <p className={isEditing ? 'hidden mt-2' : 'block mt-2'}>Status: {status}</p>
+            <p className={isEditing ? 'hidden mt-2' : 'block mt-2'}>Status: {order.status}</p>
             <form className={ isEditing ? 'block mt-2' : 'hidden mt-2' } action={updateStatusHandler}>
                 <select name="status"
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
+                    defaultValue={order.status}
                     className="select-field"    
                 >
                     <option value="">status</option>

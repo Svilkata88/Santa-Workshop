@@ -12,8 +12,8 @@ export default function AuthSection() {
                 <Link to={'/auth/logout'} className='hover:text-[var(--primary)]'>Logout</Link>
                 </>
             : <>
-                <Link to={'/auth/login'}>Login</Link>
-                <Link to={'/auth/register'}>Register</Link>
+                <Link to={'/auth/login'} className='hover:text-[var(--primary)]'>Login</Link>
+                <Link to={'/auth/register'} className='hover:text-[var(--primary)]'>Register</Link>
                 </>
             }
                 <ThemeButton />

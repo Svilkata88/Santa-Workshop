@@ -1,7 +1,7 @@
 
 import { baseUrl } from '../../firebase/firebaseConfig';
 import { useUserContext } from '../context/userContext';
-import { fetchToDb } from '../../utils/utils';
+import { fetchToDb, patchToDb } from '../../utils/utils';
 import toast from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ import OrderFormRow from './OrderFormRow';
 import FormErrorMessage from './FormErrorMessage';
 import Spinner from './Spinner';
 import { validate } from '../../utils/utils';
+import FormSubmitBtn from './buttons/FormSubmitBtn';
 
 export default function CreateOrder() {
     const { user, isAuthenticated } = useUserContext();
@@ -35,13 +36,14 @@ export default function CreateOrder() {
                 }
                 const transformedData = Object.keys(data).map(key => {
                 // returning only toys that are in stock
-                const parsedData = JSON.parse(data[key] || {});
-                const toysInStock = Number(parsedData.inStock || 0) > 0 ? parsedData : null;
+                    const toysData = data[key];
+                    const inStock = Number(toysData.inStock);
+                    const toysInStock = inStock > 0 ? inStock : null;
 
                     if(toysInStock) {    
                         return {
                             id: key,
-                            ...toysInStock
+                            ...toysData
                         }
                     }
                     return null;
@@ -52,7 +54,6 @@ export default function CreateOrder() {
     }, []);
     
     const createOrderHandler = (formData) => {
-
         const toyIds = formData.getAll('toyId');
         const allToys = toys.filter(toy => toyIds.includes(toy.id));
         const qttys = formData.getAll('qtty');
@@ -66,23 +67,29 @@ export default function CreateOrder() {
             return;
         }
 
-        const toysInTheOrder = allToys.map((toy, index) => ({
+        const toysInTheOrder = allToys.map((toy, index) => {
+
+            patchToDb(baseUrl, 'PATCH', { inStock: Number(toy.inStock) - Number(qttys[index]) }, `toys/${toy.id}`, user);
+      
+            return {
                 toyId: toy.id, 
                 toyName: toy.name,
                 qtty: qttys[index],
                 childName: childName[index],
-        }))
+            }
+        });
 
-        const body = JSON.stringify({
+        const body = {
             toys: toysInTheOrder,
             status,
             country,
             priority,
             createdAt: new Date().toISOString(),
-        });
+        };
 
 
         fetchToDb(baseUrl, 'POST', body, 'orders', user);
+
         toast.success(
         <div className='flex flex-col gap-4'>
             <h3>Order was created!</h3>
@@ -103,9 +110,12 @@ export default function CreateOrder() {
         ? 
         <Spinner/>
         :
-        <div>
-            <h1>Create Order</h1>
-            <form action={createOrderHandler} className="flex flex-col gap-4 items-center" id='create-order-form-imput-container'>
+        <div className='dark:bg-stone-900 
+                        dark:text-white 
+                        min-h-[calc(100vh-56px)]
+                        flex flex-col items-center justify-center'>
+            <h1 className='pb-20 text-xl'>Create Order</h1>
+            <form action={createOrderHandler} className="flex flex-col gap-4 items-start bg-[var(--primary-dark)] rounded-lg p-3" id='create-order-form-imput-container'>
                 {rows.map((_, index) => (
                     <OrderFormRow 
                         key={index} 
@@ -114,42 +124,11 @@ export default function CreateOrder() {
                     />
                 ))}
 
-                <input 
-                    type="text" 
-                    name="country" 
-                    placeholder='country'
-                    onBlur={(e) => setError(validate('country', e.target.value))}
-                />
-                <select name="status"
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                    onBlur={(e) => setError(validate('status', e.target.value))}
-                    className="select-field"    
-                >
-                    <option value="" selected>status</option>
-                    <option value="pending">pending</option>
-                    <option value="packed">packed</option>
-                    <option value="shipped">shipped</option>
-                    <option value="delivered">delivered</option>
-                </select>
-                <select name="priority"
-                    value={priority}
-                    onChange={(e) => setPriority(e.target.value)}
-                    onBlur={(e) => setError(validate('priority', e.target.value))}
-                    className="select-field"  
-                >
-                    <option value="" selected>priority</option>
-                    <option value="low">low</option>
-                    <option value="normal">normal</option>
-                    <option value="high">high</option>
-                </select>
-                
-                <button type="submit" className="cursor-pointer">Create the Order</button>
-                
-                <div className="flex gap-4">
+                <div className="flex gap-4 ml-auto mr-auto">
                     <button type="button" onClick={() => {
-                        setRows(prevRows => [...prevRows, prevRows.length])
-                    }} className="cursor-pointer">
+                            setRows(prevRows => [...prevRows, prevRows.length])
+                        }} 
+                        className="cursor-pointer">
                         <img src="/plus-btn.svg" alt="plus" className="w-8 h-8"/>
                     </button>
                     <button type="button" onClick={() => {
@@ -158,7 +137,43 @@ export default function CreateOrder() {
                         <img src="/minus-btn.png" alt="minus" className="w-8 h-8"/>
                     </button>
                 </div>
-                <FormErrorMessage message={error} />
+
+                <input 
+                    type="text" 
+                    name="country" 
+                    className='pl-4 py-2 border border-[var(--primary)] rounded-md w-4/9'
+                    placeholder='country'
+                    onBlur={(e) => setError(validate('country', e.target.value))}
+                />
+                <div className='flex justify-between w-full '>
+                    <select name="status"
+                        value={status}
+                        onChange={(e) => setStatus(e.target.value)}
+                        onBlur={(e) => setError(validate('status', e.target.value))}
+                        className="select-field w-4/9"      
+                    >
+                        <option value="">status</option>
+                        <option value="pending">pending</option>
+                        <option value="packed">packed</option>
+                        <option value="shipped">shipped</option>
+                        <option value="delivered">delivered</option>
+                    </select>
+                    <select name="priority"
+                        value={priority}
+                        onChange={(e) => setPriority(e.target.value)}
+                        onBlur={(e) => setError(validate('priority', e.target.value))}
+                        className="select-field w-4/9"  
+                    >
+                        <option value="">priority</option>
+                        <option value="low">low</option>
+                        <option value="normal">normal</option>
+                        <option value="high">high</option>
+                    </select>
+                </div>
+
+                <FormSubmitBtn text='Create the Order'/>
+                
+                <FormErrorMessage message={error}/>
             </form>
         </div>
     )

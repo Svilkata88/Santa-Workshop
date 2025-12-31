@@ -3,10 +3,13 @@ import { baseUrl } from '../../firebase/firebaseConfig';
 import { useUserContext } from '../context/userContext';
 import { fetchToDb } from '../../utils/utils';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function CreateToy() {
     const { user } = useUserContext();
+    const navigate = useNavigate();
+
 
     const createToyHandler = (formData) => {
 
@@ -16,10 +19,11 @@ export default function CreateToy() {
         const inStock = formData.get('inStock');
         const description = formData.get('description');
 
-        const body = JSON.stringify({ name, category, difficulty, inStock, description });  
+        const body = { name, category, difficulty, inStock, description };  
 
         fetchToDb(baseUrl, 'POST', body, 'toys', user);
         toast.success(`1 Toy ${name} created successfully!`);
+        navigate('/toys');
     };
 
     return (

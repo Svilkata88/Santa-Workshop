@@ -13,3 +13,7 @@
          focus:border-[var(--primary)]
          dark:bg-[var(--primary-dark)] dark:text-white dark:border-[var(--primary)];
 }
+
+.button {
+  @apply text-sm bg-neutral-500 rounded-lg px-3 py-2 text-zinc-200 hover:bg-neutral-400 hover:text-black
+}

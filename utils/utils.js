@@ -13,6 +13,7 @@ const fetchToDb = (url, method, body, module, user) => {
     });
 };
 
+// the same as fetchtoDB just explicitly named
 const patchToDb = (url, method, body, module, user) => {
     return user.getIdToken().then(token => {
         return fetch(`${url}/${module}.json?auth=${token}`, {
@@ -35,7 +36,7 @@ const fetchById = (url, module, id, user) => {
             }
         })
         .then(response => response.json())
-        .then(data => JSON.parse(data));          
+        .then(data => data);          
     })
 };
 
@@ -64,6 +65,21 @@ const validate = (fieldName, value) => {
                 const allowed = ['pending', 'packed'];
                 if (!allowed.includes(value)) {
                     return 'Please change the status to pending or packed.';
+                }
+                break;
+            case 'elfName':
+                if (value.trim() === '' || value.trim().lenght < 2) {
+                    return 'Elf name must be at least 2 characters.';
+                }
+                break;
+            case 'role':
+                if (value.trim() === '') {
+                    return 'please choose a role.';
+                }
+                break;
+            case 'energy':
+                if (value > 100 || value <= 0) {
+                    return 'Choose between 1 and 100.';
                 }
                 break;
             default:

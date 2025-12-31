@@ -21,7 +21,7 @@ export default function Toys() {
                 const transformedData = Object.keys(data).map(key => {
                     return {
                         id: key,
-                        ...JSON.parse(data[key])
+                        ...data[key]
                     }
                 }) 
                 setToys(transformedData);
@@ -34,14 +34,20 @@ export default function Toys() {
                 <Spinner />
                 ) : (
             <>
-                {
-                isAuthenticated && 
-                user.email === 'santa@christmasgifts.com' &&
-                <Link to={'./create-toy'}>Create Toy</Link>
-                }
-
-                <section>
-                    <h2>all Toys</h2>
+                <section  className="
+                        dark:bg-stone-900 
+                        dark:text-white 
+                        min-h-[calc(100vh-56px)]
+                        p-4
+                ">
+                    {
+                    isAuthenticated && 
+                        user.email === 'santa@christmasgifts.com' &&
+                            <Link to={'./create-toy'} className="button">
+                                Create Toy
+                            </Link>
+                    }
+                    <h2 className="mt-3">all Toys</h2>
                     <ul>
                         {toys.map(toy => (
                             <li key={toy.id}>
