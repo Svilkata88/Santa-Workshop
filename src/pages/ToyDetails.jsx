@@ -27,13 +27,40 @@
         return ( loading ? (
             <Spinner />
             ) : (
-                <>
-                    <h2>Toy Details</h2>
-                    <h3>{toy?.name}</h3>
-                    <p>Category: {toy?.category}</p>
-                    <p>Difficulty: {toy?.difficulty}</p>
-                    <p>In Stock: {toy?.inStock}</p>
-                    <p>Description: {toy?.description}</p>
-                </>
+                <div className='
+                        dark:bg-stone-900 
+                        dark:text-white 
+                        min-h-[calc(100vh-56px)]
+                        p-4'
+                >   
+                    <h1 className="text-center mb-10 text-lg">Toy Details</h1>
+                    <div className='
+                            bg-[var(--primary)] dark:bg-[var(--primary-dark)] 
+                            py-4 px-15 
+                            rounded-md 
+                            ml-auto mr-auto
+                            flex flex-col gap-3
+                            w-[400px]
+                            min-h-[300px]
+                    '>
+                        <h3 className='mb-5 text-center'>{toy?.name}</h3>
+                        <div className='flex gap-3'>
+                            <p className='w-1/2'>Category:</p>
+                            <p className='w-1/2'>{toy?.category}</p>
+                        </div>
+                        <div className='flex gap-3'>
+                            <p className='w-1/2'>Difficulty:</p>
+                            <p className='w-1/2'>{toy?.difficulty}</p>
+                        </div>
+                        <div className='flex gap-3'>
+                            <p className='w-1/2'>In Stock:</p>
+                            <p className='w-1/2'>{toy?.inStock}</p>
+                        </div>
+                        <div className='flex gap-3'>
+                            <p className='w-1/2'>Description:</p>
+                            <p className='w-1/2'>{toy?.description}</p>
+                        </div>
+                    </div>
+                </div>
             ));
     }
