@@ -41,7 +41,7 @@ export default function ElfProfile() {
         <div 
             className='
                         dark:bg-stone-900 
-                        min-h-[calc(100vh-56px)] 
+                        min-h-[calc(100vh-72px)] 
                         p-4 
                         dark:text-white
                         bg-stone-200

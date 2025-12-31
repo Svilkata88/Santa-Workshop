@@ -21,6 +21,7 @@ import { UserProvider } from './context/userContext';
 import toast, { Toaster } from 'react-hot-toast';  
 import { ElvesProvider } from './context/elvesContext';
 import CreateTask from './components/CreateTask';
+import CristmasTimeLeft from './components/CristmasTimeLeft';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
             </div>
             <Navigation />
             <AuthSection />
+            <CristmasTimeLeft targetDate={'2026-01-01T00:00:00Z'} />
         </Header>
 
         <Routes>

@@ -78,7 +78,7 @@ export default function RegisterElf() {
     return (
         <div className='
                         dark:bg-stone-900 
-                        min-h-[calc(100vh-56px)] 
+                        min-h-[calc(100vh-72px)]  
                         p-4 
                         dark:text-white
                         '

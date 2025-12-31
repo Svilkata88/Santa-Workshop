@@ -53,7 +53,7 @@ export default function Home() {
             ?
         <Spinner />
             :
-        <div className="relative h-[calc(100vh-56px)] w-full overflow-hidden">
+        <div className="relative min-h-[calc(100vh-72px)]  w-full overflow-hidden">
             <video
                 autoPlay
                 muted

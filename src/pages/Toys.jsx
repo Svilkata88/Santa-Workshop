@@ -89,7 +89,7 @@ export default function Toys() {
                         bg-stone-200
                         dark:bg-stone-900 
                         dark:text-white 
-                        min-h-[calc(100vh-56px)]
+                        min-h-[calc(100vh-72px)] 
                         p-4
                 ">
                     <h1 className="text-center mb-10 text-lg">Toys</h1>
