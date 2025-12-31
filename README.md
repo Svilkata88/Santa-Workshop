@@ -38,7 +38,6 @@ npm run build
 - CRUD UI for Toys, Orders and Elf Tasks
 - Elf management and per-elf task lists
 - Client-side routing using `react-router-dom`
-- Server-state caching/requests with `@tanstack/react-query`
 - Toast notifications via `react-hot-toast`
 - Responsive UI styling with Tailwind CSS
 - Dark mode / theme toggle (via custom hook)
@@ -51,26 +50,24 @@ npm run build
 - Data fetching / caching: `@tanstack/react-query`
 - Firebase: `firebase` (Auth + Realtime Database)
 - Notifications: `react-hot-toast`
+- State: default React state.
 - Linting: ESLint
-
-You can inspect the dependency list in `package.json`.
 
 **Configuration**
 
-- Firebase configuration is in `firebase/firebaseConfig.js`. For production, move sensitive values to environment variables and do not commit secrets.
+- Firebase configuration is in `firebase/firebaseConfig.js`. 
 
 **Futures (Planned Improvements)**
 
-- Add unit & integration tests and CI pipeline
+- refactor fetching to use tanstack/react-query / no time left now to be implemented
+- Add unit & integration tests and CI pipeline ? *
 - Role-based access control for elves/admins
 - File uploads for toy images (Firebase Storage)
 - Pagination and filtering for lists
 - Improve validation and error handling in forms
-- Deploy to a CDN / static host (Netlify, Vercel, Firebase Hosting)
+- improve state with Redux or Zustand
+- Deploy
 
-**Contributing**
-
-- Open an issue or submit a PR. Keep changes small and focused.
 
 **License**
 
