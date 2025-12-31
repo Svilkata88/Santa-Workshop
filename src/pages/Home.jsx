@@ -80,7 +80,7 @@ export default function Home() {
                     <p className="text-lg">Pending Orders: {pendingOrders}</p>
                     <p className="text-lg">Active Elves: {activeElves}</p>
                 </div>
-                <div className='flex gap-2'>
+                <div className='flex gap-10'>
                     {notices.map( (_, i) => (
                         <Notice message={notices[i]} />
                     ))}
