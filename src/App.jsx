@@ -32,9 +32,10 @@ function App() {
             <div className='flex gap-2 items-center'>
                 <img src="/logo.png" alt="Santa Hat" className='inline h-8 mr-2'/>
                 <h2>Welcome to 
-                    <span className="font-['Poppins'] font-semibold tracking-wide text-xl text-[var(--primary)] ml-2">
+                    <span className="font-['Poppins'] font-semibold tracking-wide text-xl text-green-800 dark:text-[var(--primary)] ml-2">
                         Santa workshop
-                    </span></h2>
+                    </span>
+                </h2>
             </div>
             <Navigation />
             <AuthSection />

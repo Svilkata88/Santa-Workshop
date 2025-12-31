@@ -31,7 +31,8 @@
                         dark:bg-stone-900 
                         dark:text-white 
                         min-h-[calc(100vh-56px)]
-                        p-4'
+                        p-4
+                        bg-stone-200'
                 >   
                     <h1 className="text-center mb-10 text-lg">Toy Details</h1>
                     <div className='

@@ -31,7 +31,8 @@ export default function ElfTasks() {
         <div className="dark:bg-stone-900 
                         min-h-[calc(100vh-56px)] 
                         p-4 
-                        dark:text-white">
+                        dark:text-white
+                        bg-stone-200">
              <h1 className="text-center mb-10 text-lg">Elf tasks</h1>
 
              <CreateBtn url='./new' />
@@ -40,7 +41,7 @@ export default function ElfTasks() {
                 {elf?.tasks && Object.values(elf.tasks).map((task, index) => (
                     <div key={index} className="
                             bg-[var(--primary)] dark:bg-[var(--primary-dark)] 
-                            p-3 mt-5
+                            p-3 mt-5 ml-10
                             rounded-md 
                             flex gap-3 items-center
                             w-1/2

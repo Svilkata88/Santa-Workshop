@@ -50,6 +50,7 @@ export default function CreateTasks() {
                         min-h-[calc(100vh-56px)] 
                         p-4 
                         dark:text-white
+                        bg-stone-200
                         '
         >
             <h2 className='mb-10 mt-10 text-center'>Create Task</h2>

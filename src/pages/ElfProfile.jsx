@@ -44,6 +44,7 @@ export default function ElfProfile() {
                         min-h-[calc(100vh-56px)] 
                         p-4 
                         dark:text-white
+                        bg-stone-200
                         '
 
         >

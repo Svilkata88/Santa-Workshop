@@ -8,12 +8,12 @@ export default function AuthSection() {
         <div className="flex gap-3">
             {isAuthenticated ? 
                 <>
-                <span>Welcome, {user.email}</span>
-                <Link to={'/auth/logout'} className='hover:text-[var(--primary)]'>Logout</Link>
+                Welcome, <span className='text-green-800 dark:text-[var(--primary)] font-bold'>{user.email}</span>
+                <Link to={'/auth/logout'} className='hover:text-lime-300 dark:hover:text-[var(--primary)]'>Logout</Link>
                 </>
             : <>
-                <Link to={'/auth/login'} className='hover:text-[var(--primary)]'>Login</Link>
-                <Link to={'/auth/register'} className='hover:text-[var(--primary)]'>Register</Link>
+                <Link to={'/auth/login'} className='hover:text-lime-300 dark:hover:text-[var(--primary)]'>Login</Link>
+                <Link to={'/auth/register'} className='hover:text-lime-300 dark:hover:text-[var(--primary)]'>Register</Link>
                 </>
             }
                 <ThemeButton />

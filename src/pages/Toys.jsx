@@ -86,6 +86,7 @@ export default function Toys() {
                 ) : (
             <>
                 <section  className="
+                        bg-stone-200
                         dark:bg-stone-900 
                         dark:text-white 
                         min-h-[calc(100vh-56px)]

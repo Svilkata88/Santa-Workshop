@@ -70,7 +70,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-black/50" />
 
             <div className="relative z-10 flex flex-col gap-10 h-full items-center justify-start text-white text-center">
-                <div className='mt-20'>
+                <div className='mt-14'>
                     <h1 className="text-4xl font-bold mb-4">Santa Workshop 🎅</h1>
                     <p className="text-lg">Create magic orders effortlessly</p>
                 </div>

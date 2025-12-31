@@ -37,6 +37,7 @@ export default function Elves() {
                         min-h-[calc(100vh-56px)] 
                         p-4 
                         dark:text-white
+                        bg-stone-200
                         '
         >
             <h2 className="text-center">ALL Elves</h2>

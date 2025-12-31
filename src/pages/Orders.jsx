@@ -60,14 +60,15 @@ export default function Orders() {
                             min-h-[calc(100vh-56px)] 
                             p-4 
                             dark:text-white
+                            bg-stone-200
                             '
             >
                 {/* Navigation buttons */}
                 <div className="flex gap-1 mt-4 ml-4">
                     <button 
                         className={
-                            tabClass + 
-                            `${activeTab === 'all' ? 'bg-[var(--primary)] text-black hover:text-white' : 'bg-gray-200'}
+                            tabClass + ' ' +
+                            `${activeTab === 'all' ? 'bg-[var(--primary)] hover:text-white' : 'bg-gray-200'} 
                             ${activeTab === 'all' ? 'dark:bg-green-300 dark:hover:bg-emerald-400 text-black' : 'dark:bg-[var(--primary-dark)]'}`
                         }
                         onClick={() => setActiveTab('all')}
@@ -76,8 +77,8 @@ export default function Orders() {
                     </button>
                     <button 
                         className={
-                            tabClass + 
-                            `${activeTab === 'pending' ? 'bg-[var(--primary)] hover:text-white' : 'bg-gray-200'}
+                            tabClass + ' ' +
+                            `${activeTab === 'pending' ? 'bg-[var(--primary)] hover:text-white' : 'bg-gray-200'} 
                             ${activeTab === 'pending' ? 'dark:bg-green-300 dark:hover:bg-emerald-400 text-black' : 'dark:bg-[var(--primary-dark)]'}`
                         }
                         onClick={() => setActiveTab('pending')}
@@ -86,8 +87,8 @@ export default function Orders() {
                     </button>
                     <button 
                         className={
-                            tabClass + 
-                            `${activeTab === 'packed' ? 'bg-[var(--primary)] hover:text-white' : 'bg-gray-200'}
+                            tabClass + ' ' +
+                            `${activeTab === 'packed' ? 'bg-[var(--primary)] hover:text-white' : 'bg-gray-200'} 
                             ${activeTab === 'packed' ? 'dark:bg-green-300 dark:hover:bg-emerald-400 text-black' : 'dark:bg-[var(--primary-dark)]'}`
                         }
                         onClick={() => setActiveTab('packed')}
@@ -96,8 +97,8 @@ export default function Orders() {
                     </button>
                     <button 
                         className={
-                            tabClass + 
-                            `${activeTab === 'shipped' ? 'bg-[var(--primary)] hover:text-white' : 'bg-gray-200'}
+                            tabClass + ' ' + 
+                            `${activeTab === 'shipped' ? 'bg-[var(--primary)] hover:text-white' : 'bg-gray-200'} 
                             ${activeTab === 'shipped' ? 'dark:bg-green-300 dark:hover:bg-emerald-400 text-black' : 'dark:bg-[var(--primary-dark)]'}`
                         }
                         onClick={() => setActiveTab('shipped')}
